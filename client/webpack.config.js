@@ -9,9 +9,12 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
   mode: 'development',
-  entry: './src/js/index.js',
+  entry: {
+    main: './src/js/index.js',
+    install: './src/js/install.js'
+  },
   output: {
-    filename: 'bundle.js',
+    filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist'),
   },
 
@@ -23,16 +26,18 @@ module.exports = {
     new MiniCssExtractPlugin(),
     new InjectManifest({
       swSrc: './src-sw.js',
-      swDest: 'service-worker.js',
+      swDest: 'src-sw.js',
     }), 
     new WebpackPwaManifest({
-      // TODO: Create a manifest.json:
-      name: 'My Progressive Web App',
-      short_name: 'PWA',
-      description: 'Gabagool',
+      name: 'Just a Text Editor',
+      short_name: 'Editor',
+      description: 'Edits text',
       background_color: '#ffffff',
       crossorigin: 'use-credentials',
       fingerprints: false,
+      inject: true,
+      start_url: '/',
+      publicPath: '/',
       icons: [{
         src: './src/images/logo.png',
         type: 'images/png',
