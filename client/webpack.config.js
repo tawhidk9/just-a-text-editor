@@ -11,7 +11,7 @@ module.exports = {
   mode: 'development',
   entry: {
     main: './src/js/index.js',
-    install: './src/js/install.js'
+    install: './src/js/install.js',
   },
   output: {
     filename: '[name].bundle.js',
@@ -30,7 +30,7 @@ module.exports = {
     }), 
     new WebpackPwaManifest({
       name: 'Just a Text Editor',
-      short_name: 'Editor',
+      short_name: 'JATE',
       description: 'Edits text',
       background_color: '#ffffff',
       crossorigin: 'use-credentials',
@@ -44,7 +44,12 @@ module.exports = {
         sizes: [96, 128, 192, 256, 384, 512],
         purpose: 'any maskable'
       }
-      ]
+      ],
+      orientation: "portrait",
+      display: "standalone",
+      description: "Contact DataBase",
+      theme_color: "#7eb4e2",
+
     }),
    
   ],
@@ -65,6 +70,10 @@ module.exports = {
           loader: 'babel-loader',
           options: {
             presets: ['@babel/preset-env'],
+            plugins: [
+              "@babel/plugin-proposal-object-rest-spread",
+              "@babel/transform-runtime",
+            ],
           },
         },
       },
